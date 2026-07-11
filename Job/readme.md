@@ -1,3 +1,15 @@
+---
+
+Pwning "Job" on HackTheBox: From a Fake Job Posting to NT AUTHORITY\SYSTEM
+A Medium-difficulty Windows box that starts with a CV lure and ends with a stolen SYSTEM token.
+
+---
+<img src="Machine_Jpob.png">
+
+
+
+
+
 ## Executive Summary
 Job is a Windows machine on HackTheBox. The attack chain is as follows:
 
