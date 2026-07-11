@@ -522,7 +522,7 @@ PS C:\Windows\system32> type C:\Users\Administrator\Desktop\root.txt
 6497616365f1ba4c5a98aaa603a8c5f4
 ```
 
-<img src="POC/Job_Pwned.png" alt="error loading image">
+<img src="POC/Job_Pwned_.png" alt="error loading image">
 
 ```
 You have solved Job!
