@@ -1,6 +1,6 @@
 ---
 
-Pwning "Job" on HackTheBox: From a Fake Job Posting to NT AUTHORITY\SYSTEM
+###Pwning "Job" on HackTheBox: From a Fake Job Posting to NT AUTHORITY\SYSTEM
 A Medium-difficulty Windows box that starts with a CV lure and ends with a stolen SYSTEM token.
 
 ---
