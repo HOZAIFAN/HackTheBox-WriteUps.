@@ -526,7 +526,7 @@ PS C:\Windows\system32> type C:\Users\Administrator\Desktop\root.txt
 
 ```
 You have solved Job!
-Congratulations c0gnit00
+Congratulations RavenHex
 
 #435 Machine Rank
 11 Jul 2026 Pwn Date
