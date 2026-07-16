@@ -290,6 +290,8 @@ The `vacation.png` image in the Administrator's directory shows a man with a par
 
 ---
 
+![vacation](POC/vacation.png)
+
 ## SMB Share Enumeration
 
 ### Anonymous SMB Access
