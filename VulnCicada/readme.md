@@ -1,10 +1,15 @@
 # VulnCicada - Complete Write-up
 
 **Date:** 16 July 2026
+
 **Machine Rank:** #1020
+
 **Difficulty:** Medium
+
 **OS:** Windows Server 2022
+
 **Domain:** cicada.vl
+
 **IP Address:** 10.129.234.48
 
 ---
