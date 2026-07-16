@@ -270,7 +270,7 @@ The `marketing.png` image in Rosie.Powell's directory is an image file that, upo
 Cicada123
 ```
 
-![Marketing Image](POC/marketing.png)
+![Marketing Image](POC/Marketing.png)
 
 **Significance:** This provides us with a valid domain password for Rosie.Powell.
 
