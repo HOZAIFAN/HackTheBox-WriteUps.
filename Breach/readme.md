@@ -9,6 +9,7 @@
 
 ---
 
+![Breach Introduction](POC/Breach_intrp.png)
 ## Executive Summary
 
 Breach is a medium-difficulty Windows Active Directory machine that demonstrates several real-world attack vectors commonly found in enterprise environments. The attack chain progresses through the following phases:
@@ -39,7 +40,7 @@ Breach is a medium-difficulty Windows Active Directory machine that demonstrates
 | **Domain** | `breach.vl` |
 | **Domain Controller** | `BREACHDC.breach.vl` |
 
-![Breach Introduction](POC/Breach_intrp.png)
+
 
 ---
 
