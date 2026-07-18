@@ -1,10 +1,15 @@
 # Scrambled - Complete Write-up
 
-**Date:** 18 July 2026
-**Machine Rank:** #2678
+**Date:** 18 July 2026 
+
+**Machine Rank:** #2678 
+
 **Difficulty:** Medium
+
 **OS:** Windows Server 2019, Build 17763
+
 **Domain:** scrm.local
+
 **IP Address:** 10.129.118.40
 
 ---
