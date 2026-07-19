@@ -1,11 +1,11 @@
-# Media - Complete Write-up\
+# Media - Complete Write-up
 
 **Date:** 18 July 2026 \
 **Machine Rank:** #\
 **Difficulty:** Medium\
 **OS:** Windows Server 2022\
 **Domain:** MEDIA\
-**IP Address:** 10.129.234.67
+**IP Address:** 10.129.234.67\
 **Pentester**:**RavenHex**
 
 ---
