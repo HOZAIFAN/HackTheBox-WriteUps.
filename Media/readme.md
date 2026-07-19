@@ -6,7 +6,7 @@
 **Domain/Hostname:** MEDIA\
 **Target IP:** 10.129.234.67\
 **Attacker Host:** hyena@hyena\
-**Pentester:** RavenHex\
+**Pentester:** RavenHex
 
 ---
 
