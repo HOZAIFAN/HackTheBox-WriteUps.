@@ -8,7 +8,7 @@
 **Attacker Host:** hyena@hyena\
 **Pentester:** RavenHex
 
----
+---   
 
  <img src=POC/Media_intro.png> — initial view of the target on first contact, taken before any enumeration began, establishing the starting state of the engagement.)*
 
