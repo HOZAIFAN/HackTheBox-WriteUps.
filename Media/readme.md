@@ -1,12 +1,12 @@
 # Media — HackTheBox Write-up
 
-**Date:** 18 July 2026
-**Difficulty:** Medium
-**OS:** Windows Server 2022
-**Domain/Hostname:** MEDIA
-**Target IP:** 10.129.234.67
-**Attacker Host:** hyena@hyena
-**Pentester:** RavenHex
+**Date:** 18 July 2026\
+**Difficulty:** Medium\
+**OS:** Windows Server 2022\
+**Domain/Hostname:** MEDIA\
+**Target IP:** 10.129.234.67\
+**Attacker Host:** hyena@hyena\
+**Pentester:** RavenHex\
 
 ---
 
