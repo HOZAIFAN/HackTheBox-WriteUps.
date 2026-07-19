@@ -10,7 +10,7 @@
 
 ---
 
-*(POC: `Media_intro.png` — initial view of the target on first contact, taken before any enumeration began, establishing the starting state of the engagement.)*
+*(POC: `POC/Media_intro.png` — initial view of the target on first contact, taken before any enumeration began, establishing the starting state of the engagement.)*
 
 ## 1. Overview
 
@@ -97,7 +97,7 @@ The RDP NTLM-info leak is a small but useful bonus: without any authentication a
 
 Browsing to port 80 shows a company site for "ProMotion Studio."
 
-*(POC: `Site_hosted.png` — the ProMotion Studio site as served on port 80, confirming the Apache/PHP stack identified during service scanning.)*
+*(POC: `POC/Site_hosted.png` — the ProMotion Studio site as served on port 80, confirming the Apache/PHP stack identified during service scanning.)*
 
 Digging through the site reveals a careers/application page with a file-upload form intended for candidates to submit an introduction video. This kind of "upload a media file" feature is exactly the kind of functionality worth testing carefully, because:
 
@@ -259,7 +259,7 @@ Microsoft Windows [Version 10.0.20348.4052]
 enox@MEDIA C:\Users\enox>
 ```
 
-*(POC: `SSH_as_enox.png` — authenticated interactive session as `enox`.)*
+*(POC: `POC/SSH_as_enox.png` — authenticated interactive session as `enox`.)*
 
 ### 5.1 User Flag
 
@@ -305,7 +305,7 @@ enox@MEDIA C:\Users\enox\Desktop>type user.txt
 134f2bef2b22a891e3e8fd8e6515813a
 ```
 
-**User Flag:** `134f2bef2b22a891e3e8fd8e6515813a`
+**User Flag:** `134f2bef2b22a*****d8e6515813a`
 
 ---
 
@@ -389,7 +389,7 @@ With the junction in place, a minimal PHP web shell is crafted and uploaded thro
 hyena@hyena$ echo '<?php system($_GET["cmd"]); ?>' > cmd.php
 ```
 
-*(POC: `Files_created.png` — confirmation that the uploaded file landed inside the web root via the junction rather than the isolated upload folder.)*
+*(POC: `POC/Files_created.png` — confirmation that the uploaded file landed inside the web root via the junction rather than the isolated upload folder.)*
 
 Because the web application still thinks it's writing to an isolated per-applicant folder, it has no idea it just dropped an executable PHP file straight into the document root.
 
@@ -574,9 +574,9 @@ enox@MEDIA C:\Users\enox>type C:\Users\Administrator\Desktop\root.txt
 3cfd8f3c5994b0ec9bbdc47cb27f0e7f
 ```
 
-**Root Flag:** `3cfd8f3c5994b0ec9bbdc47cb27f0e7f`
+**Root Flag:** `3cfd8f3c****c9bbdc47cb27f0e7f`
 
-*(POC: `Media_pwned.png` — final confirmation of full compromise, both flags retrieved and Administrator access verified on MEDIA.)*
+*(POC: `POC/Media_pwned.png` — final confirmation of full compromise, both flags retrieved and Administrator access verified on MEDIA.)*
 
 ---
 
