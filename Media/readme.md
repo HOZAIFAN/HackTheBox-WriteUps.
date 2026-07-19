@@ -10,7 +10,7 @@
 
 ---
 
-*(POC: <img src=POC/Media_intro.png> — initial view of the target on first contact, taken before any enumeration began, establishing the starting state of the engagement.)*
+ <img src=POC/Media_intro.png> — initial view of the target on first contact, taken before any enumeration began, establishing the starting state of the engagement.)*
 
 ## 1. Overview
 
@@ -97,14 +97,14 @@ The RDP NTLM-info leak is a small but useful bonus: without any authentication a
 
 Browsing to port 80 shows a company site for "ProMotion Studio."
 
-*(POC: <img src=POC/Site_hosted.png> — the ProMotion Studio site as served on port 80, confirming the Apache/PHP stack identified during service scanning.)*
+ <img src=POC/Site_hosted.png> — the ProMotion Studio site as served on port 80, confirming the Apache/PHP stack identified during service scanning.)*
 
 Digging through the site reveals a careers/application page with a file-upload form intended for candidates to submit an introduction video. This kind of "upload a media file" feature is exactly the kind of functionality worth testing carefully, because:
 
 - File upload endpoints are one of the most common ways to get code execution on a web server if the file type isn't properly restricted.
 - Even when the server-side type restriction is solid, the *client* that eventually opens the uploaded file can itself be tricked, which is the angle used here.
 
-*(POC: <img src=POC/Found_fileupload_option.png> — the application form showing the video-upload field discovered during enumeration.)*
+ <img src=POC/Found_fileupload_option.png> — the application form showing the video-upload field discovered during enumeration.)*
 
 To make sure nothing else on the site was missed, a directory/file brute-force was also run against the web root, so that any hidden endpoints, backup files, or admin panels would be caught early rather than relying purely on manual browsing:
 
@@ -258,8 +258,7 @@ Microsoft Windows [Version 10.0.20348.4052]
 
 enox@MEDIA C:\Users\enox>
 ```
-
-*(POC: <img src=POC/SSH_as_enox.png> — authenticated interactive session as `enox`.)*
+ <img src=POC/SSH_as_enox.png> — authenticated interactive session as `enox`.)*
 
 ### 5.1 User Flag
 
@@ -576,7 +575,7 @@ enox@MEDIA C:\Users\enox>type C:\Users\Administrator\Desktop\root.txt
 
 **Root Flag:** `3cfd8f3c****c9bbdc47cb27f0e7f`
 
-*(POC: <img src=POC/Media_pwned.png> — final confirmation of full compromise, both flags retrieved and Administrator access verified on MEDIA.)*
+ <img src=POC/Media_pwned.png> — final confirmation of full compromise, both flags retrieved and Administrator access verified on MEDIA.)*
 
 ---
 
