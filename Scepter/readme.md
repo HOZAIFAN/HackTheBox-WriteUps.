@@ -1,12 +1,12 @@
 # Scepter — HackTheBox Write-up
 
-**Date:** 23 July 2026 /
-**Difficulty:** Hard/
-**OS:** Windows Server 2019/2022/
-**Domain/Hostname:** scepter.htb / dc01.scepter.htb/
-**Target IP:** 10.129.244.44/
-**Attacker Host:** hyena@hyena/
-**Pentester:** RavenHex/
+**Date:** 23 July 2026 \
+**Difficulty:** Hard \
+**OS:** Windows Server 2019/2022 \
+**Domain/Hostname:** scepter.htb / dc01.scepter.htb \
+**Target IP:** 10.129.244.44 \
+**Attacker Host:** hyena@hyena \
+**Pentester:** RavenHex \
 
 ---
 
