@@ -80,7 +80,6 @@ PORT      STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 16.42 seconds
 ```
 
-<img src="POC/Scepter_Intro.png">
 
 The port list is immediately recognizable as a Windows Active Directory Domain Controller: Kerberos (88), LDAP/Global Catalog (389/3268/3269), SMB (445), and the RPC/WinRM ports that come with every domain-joined Windows box. What stands out is port 2049 — NFS — a Unix/Linux file-sharing protocol that has no business running on a domain controller, and is the first thread worth pulling.
 
@@ -192,7 +191,6 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 351.70 seconds
 ```
 
-<img src="POC/Scepter_Intro.png">
 
 **Key Findings:**
 - Domain: `scepter.htb`
@@ -254,8 +252,6 @@ drwxr-xr-x 9 root   root    4096 Jul 23 01:03 ..
 - `lewis.pfx` — PFX bundle for e.lewis
 - `scott.pfx` — PFX bundle for o.scott
 
-<img src="POC/Scepter_Intro.png">
-
 Every file here is authentication material for Active Directory Certificate Services (ADCS). Finding client certificates and private keys sitting on an anonymously-readable file share is effectively equivalent to finding a list of passwords — whoever holds a valid cert/key pair for a domain user can authenticate to AD as that user.
 
 ---
@@ -308,7 +304,6 @@ Session completed.
 
 **Cracked Password:** `newpassword` (for all PFX files)
 
-<img src="POC/Scepter_Intro.png">
 
 Password reuse across every PFX file in the share compounds the weak-password problem: cracking a single one instantly hands over every certificate in the folder.
 
