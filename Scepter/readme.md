@@ -6,7 +6,7 @@
 **Domain/Hostname:** scepter.htb / dc01.scepter.htb \
 **Target IP:** 10.129.244.44 \
 **Attacker Host:** hyena@hyena \
-**Pentester:** RavenHex \
+**Pentester:** RavenHex 
 
 ---
 
