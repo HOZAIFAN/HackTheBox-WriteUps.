@@ -1,12 +1,12 @@
 # Vintage — HackTheBox Write-up
 
 **Date:** 24 July 2026 \
-**Difficulty:** Hard  \
+**Difficulty:** Super Hard  \
 **OS:** Windows Server (Active Directory) \
 **Domain/Hostname:** vintage.htb / dc01.vintage.htb  \
 **Target IP:** 10.129.231.205  \
 **Attacker Host:** hyena@hyena \
-**Pentester:** N/A
+**Pentester:** RavenHex
 
 ---
 <img src="POC/Vintage_intro.png">
