@@ -191,7 +191,8 @@ Cross-Origin-Opener-Policy: same-origin
 - Profile export generates PDFs using xhtml2pdf
 
 ### 2.5 PDF Metadata Analysis
-
+After rounding on webapp i saw that i can donwload my profile in pdf
+<img src="POC/User_bio_area.png">
 The PDF export reveals the underlying technology:
 
 ```bash
@@ -249,7 +250,7 @@ A ping test is performed to confirm command execution:
 </font></para>
 ```
 
-<img src="POC/User_bio_area.png">
+
 
 The payload is pasted into the bio field of the user profile.
 
