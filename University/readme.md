@@ -9,7 +9,7 @@
 **Pentester:** RavenHex
 
 ---
-
+<img src="POC/University.png">
 ## 1. Overview
 
 University is an Insane-difficulty Windows Active Directory machine that demonstrates a sophisticated attack chain involving web application exploitation, certificate abuse, and Kerberos delegation misconfigurations. The attack path progresses from a ReportLab RCE vulnerability, through certificate theft and a phishing-style lecture upload, to an NTLM relay against Windows delegation, and finally to domain admin via a Group Managed Service Account (GMSA) that is itself misconfigured with Resource-Based Constrained Delegation (RBCD) rights over the Domain Controller.
@@ -75,7 +75,6 @@ PORT      STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 15.07 seconds
 ```
 
-<img src="Default_page.png">
 
 The port list is immediately recognizable as a Windows Active Directory Domain Controller: Kerberos (88), LDAP/Global Catalog (389/3268/3269), SMB (445), and the RPC/WinRM ports that come with every domain-joined Windows box. Port 80 is open, indicating a web server.
 
@@ -145,7 +144,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 90.84 seconds
 ```
 
-<img src="Default_page.png">
+<img src="POC/Default_page.png">
 
 **Key Findings:**
 - Domain: `university.htb`
@@ -186,7 +185,7 @@ Referrer-Policy: same-origin
 Cross-Origin-Opener-Policy: same-origin
 ```
 
-<img src="University.png">
+
 
 **Key Observations:**
 - Django web application (confirmed by the default Django 404 page and by Wappalyzer)
@@ -254,11 +253,11 @@ A ping test is performed to confirm command execution before committing to a ful
 </font></para>
 ```
 
-<img src="User_bio_area.png">
+<img src="POC/User_bio_area.png">
 
 The payload is pasted into the bio field of the user profile.
 
-<img src="Submitting_payload_inBio_section.png">
+<img src="POC/Submitting_payload_inBio_section.png">
 
 Upon exporting the profile to PDF, ICMP packets confirm command execution:
 
@@ -313,7 +312,7 @@ Getting the payload onto disk is done in two stages rather than one long inline 
 </font></para>
 ```
 
-<img src="Got_initial_university_shell.png">
+<img src="POC/Got_initial_university_shell.png">
 
 A reverse shell is received:
 
@@ -588,11 +587,11 @@ hyena@hyena$ openssl pkcs12 -export -out nya.pfx -inkey nya.key -in nya.crt -pas
 
 Uploading this forged certificate at the site's certificate-login page authenticates directly as `nya` — the application trusts anything signed by its own CA and never checks whether the certificate corresponds to a request it actually issued.
 
-<img src="Succesfull_login_as_naya.png">
+<img src="POC/Succesfull_login_as_naya.png">
 
 Login as Nya provides professor access, including the ability to create and manage courses and lectures:
 
-<img src="naya_professor_detail.png">
+<img src="POC/naya_professor_detail.png">
 
 ### 6.3 Uploading Nya's GPG Public Key
 
@@ -641,7 +640,7 @@ hyena@hyena$ gpg -u nya.laracrof@skype.com --detach-sign lecture0xdf.zip
 
 One easy-to-miss requirement: the archive's contents must sit at the root of the zip with no internal folder, or the site's automated review pipeline silently fails to process it — a subtlety that isn't obvious just from looking at the sample lecture template the site provides.
 
-<img src="Upload_form.png">
+<img src="POC/Upload_form.png">
 
 The lecture, along with its `.sig` file and updated public key, is uploaded as Nya.
 
@@ -923,7 +922,7 @@ C:\Users\Administrator\Desktop> type root.txt
 5048c9c4357420a96a8aec19e8598521
 ```
 
-<img src="pwned.png">
+<img src="POC/pwned.png">
 
 ---
 
