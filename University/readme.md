@@ -10,6 +10,7 @@
 
 ---
 <img src="POC/University.png">
+
 ## 1. Overview
 
 University is an Insane-difficulty Windows Active Directory machine that demonstrates a sophisticated attack chain involving web application exploitation, certificate abuse, and Kerberos delegation misconfigurations. The attack path progresses from a ReportLab RCE vulnerability, through certificate theft and a phishing-style lecture upload, to an NTLM relay against Windows delegation, and finally to domain admin via a Group Managed Service Account (GMSA) that is itself misconfigured with Resource-Based Constrained Delegation (RBCD) rights over the Domain Controller.
