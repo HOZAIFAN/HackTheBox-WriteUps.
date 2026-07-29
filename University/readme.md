@@ -1,11 +1,11 @@
 # 🏆 Complete Detailed Write-Up: University.htb
 
-**Date:** 28 July 2026
-**Difficulty:** Insane
-**OS:** Windows Server 2019/2022
-**Domain:** university.htb
-**Target IP:** 10.129.231.193
-**Attacker Host:** hyena@hyena
+**Date:** 28 July 2026 \
+**Difficulty:** Insane \ 
+**OS:** Windows Server 2019/2022 \
+**Domain:** university.htb \
+**Target IP:** 10.129.231.193 \
+**Attacker Host:** hyena@hyena \
 **Pentester:** RavenHex
 
 ---
