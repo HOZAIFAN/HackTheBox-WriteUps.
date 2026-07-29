@@ -197,6 +197,8 @@ Cross-Origin-Opener-Policy: same-origin
 
 ### 2.5 PDF Metadata Analysis
 
+<img src="POC/User_bio_area.png">
+
 The PDF export reveals the underlying technology:
 
 ```bash
@@ -254,7 +256,6 @@ A ping test is performed to confirm command execution before committing to a ful
 </font></para>
 ```
 
-<img src="POC/User_bio_area.png">
 
 The payload is pasted into the bio field of the user profile.
 
