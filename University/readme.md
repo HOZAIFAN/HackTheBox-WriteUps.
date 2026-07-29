@@ -184,7 +184,7 @@ Referrer-Policy: same-origin
 Cross-Origin-Opener-Policy: same-origin
 ```
 
-<img src="University.png">
+<img src="POC/University.png">
 
 **Key Observations:**
 - Django web application
