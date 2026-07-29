@@ -145,7 +145,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 90.84 seconds
 ```
 
-<img src="POC/Default_page.png">
+<img src="POC/Defalut_page.png">
 
 **Key Findings:**
 - Domain: `university.htb`
@@ -258,7 +258,7 @@ A ping test is performed to confirm command execution before committing to a ful
 
 The payload is pasted into the bio field of the user profile.
 
-<img src="POC/Submitting_payload_inBio_section.png">
+<img src="POC/Submiting_paylad_inBio_section.png">
 
 Upon exporting the profile to PDF, ICMP packets confirm command execution:
 
@@ -588,7 +588,7 @@ hyena@hyena$ openssl pkcs12 -export -out nya.pfx -inkey nya.key -in nya.crt -pas
 
 Uploading this forged certificate at the site's certificate-login page authenticates directly as `nya` — the application trusts anything signed by its own CA and never checks whether the certificate corresponds to a request it actually issued.
 
-<img src="POC/Succesfull_login_as_naya.png">
+<img src="POC/Succesfullt_login_as_naya.png">
 
 Login as Nya provides professor access, including the ability to create and manage courses and lectures:
 
