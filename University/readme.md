@@ -76,7 +76,6 @@ PORT      STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 15.07 seconds
 ```
 
-<img src="POC/Default_page.png">
 
 The port list is immediately recognizable as a Windows Active Directory Domain Controller: Kerberos (88), LDAP/Global Catalog (389/3268/3269), SMB (445), and the RPC/WinRM ports that come with every domain-joined Windows box. Port 80 is open, indicating a web server.
 
@@ -146,7 +145,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 90.84 seconds
 ```
 
-<img src="POC/Default_page.png">
+
 
 **Key Findings:**
 - Domain: `university.htb`
@@ -170,7 +169,7 @@ hyena@hyena$ echo "10.129.231.193 university.htb dc.university.htb" | sudo tee -
 ### 2.4 Web Application Enumeration
 
 The website is a Django application for a university:
-
+<img src="POC/Defalut_page.png">
 ```bash
 hyena@hyena$ curl -I http://university.htb/
 HTTP/1.1 200 OK
@@ -184,7 +183,6 @@ Referrer-Policy: same-origin
 Cross-Origin-Opener-Policy: same-origin
 ```
 
-<img src="POC/University.png">
 
 **Key Observations:**
 - Django web application
@@ -255,7 +253,7 @@ A ping test is performed to confirm command execution:
 
 The payload is pasted into the bio field of the user profile.
 
-<img src="POC/Submitting_payload_inBio_section.png">
+<img src="POC/Submiting_paylad_inBio_section.png">
 
 Upon exporting the profile to PDF, ICMP packets confirm command execution:
 
@@ -521,7 +519,7 @@ hyena@hyena$ openssl x509 -req -in nya.csr -CA rootCA.crt -CAkey rootCA.key -CAc
 hyena@hyena$ openssl pkcs12 -export -out nya.pfx -inkey nya.key -in nya.crt -password pass:nya123
 ```
 
-<img src="POC/Succesfull_login_as_naya.png">
+<img src="POC/Succesfullt_login_as_naya.png">
 
 Login as Nya provides professor access:
 
