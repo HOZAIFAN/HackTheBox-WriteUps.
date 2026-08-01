@@ -7,7 +7,7 @@ Domain: windcorp.htb\
 IP Address: 10.129.230.109 \
 Pentester:RavenHex
 
-<img src="POC/Hathor_intro">
+<img src="POC/Hathor_intro.png">
 
 ## Executive Summary
 
