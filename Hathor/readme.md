@@ -4,7 +4,8 @@ Machine Rank: #607\
 Difficulty: Insane\
 OS: Windows Server 2022\
 Domain: windcorp.htb\
-IP Address: 10.129.230.109
+IP Address: 10.129.230.109 \
+Pentester:RavenHex
 
 <img src="POC/Hathor_intro">
 
@@ -479,9 +480,9 @@ Cracked instantly against `rockyou.txt`: `BeatriceMill`'s password is `!!!!ilove
 
 ---
 
-# Complete Write-Up: SMB Share Enumeration to SYSTEM Shell
+# SMB Share Enumeration to SYSTEM Shell
 
-## Phase 1: SMB Share Enumeration
+##  SMB Share Enumeration
 
 After cracking BeatriceMill's password (`!!!!ilovegood17`) and obtaining a valid Kerberos ticket, we needed to understand what network resources our compromised user could access. We used **nxc (NetExec)** with Kerberos authentication to enumerate SMB shares on the domain controller:
 
@@ -512,7 +513,7 @@ nameserver 10.129.230.109
 
 With `/etc/resolv.conf` now resolving through the domain's own DNS server, `hathor.windcorp.htb` resolved correctly and the Kerberos-authenticated SMB connection went through without issue.
 
-## Phase 2: Connecting to the Share
+##  Connecting to the Share
 
 To explore what files existed in this writable share, we connected using `smbclient` with our Kerberos ticket:
 
@@ -542,7 +543,7 @@ smb: \scripts\> ls
 
 We discovered `7-zip64.dll` in the scripts folder. Examining the AutoIt scripts (particularly `7Zip.au3`) revealed that they referenced and loaded this DLL. This was our entry point: if we could replace this DLL with our own malicious version, we would get code execution when the scheduled task ran the AutoIt scripts.
 
-## Phase 3: Identifying Periodic Execution
+##  Identifying Periodic Execution
 
 To confirm these executables were actually running periodically, we created a batch script from our web shell that continuously checked the process list:
 
@@ -567,7 +568,7 @@ Bginfo64.exe                 25352                            1     20,392 K
 
 This confirmed both `AutoIt3_x64.exe` and `Bginfo64.exe` ran regularly. AutoIt ran for about 30 seconds, followed by Bginfo for 10 seconds, with the cycle repeating every 3-5 minutes. These scheduled tasks were perfect targets for a hijacking attack.
 
-## Phase 4: Testing File Overwrite Permissions
+## Testing File Overwrite Permissions
 
 Our first thought was to directly overwrite the executables, but we needed to test if we had permission:
 
@@ -605,7 +606,7 @@ smb: \scripts\> ls 7-zip64.dll
 
 This confirmed we could perform DLL hijacking on the AutoIt scheduled task.
 
-## Phase 5: Crafting a Test DLL
+## Crafting a Test DLL
 
 Before creating a reverse shell, we needed to verify that our DLL would actually execute and understand the user context it ran in. We created a simple DLL in Visual Studio:
 
@@ -645,7 +646,7 @@ sudo tcpdump -ni tun0 icmp
 
 The ping requests confirmed our DLL executed successfully.
 
-## Phase 6: Enumerating Execution Context
+##  Enumerating Execution Context
 
 To understand who was running our DLL and what permissions existed, we created a more detailed DLL:
 
@@ -671,7 +672,7 @@ c:\Users\Public>type 0xdf.txt
 - `ginawild` has full control over `Bginfo64.exe` through group membership
 - `7-zip64.dll` is writable by all users
 
-## Phase 7: Discovering Firewall Rules
+##  Discovering Firewall Rules
 
 We also queried the firewall rules to understand network restrictions:
 
@@ -686,7 +687,7 @@ reg query HKLM\Software\Policies\Microsoft\WindowsFirewall\FirewallRules
 
 This meant we couldn't use AutoIt for a reverse shell, but Bginfo was the perfect target.
 
-## Phase 8: Creating the Privilege Escalation DLL
+## Creating the Privilege Escalation DLL
 
 With all this information, we built our final DLL to:
 
@@ -711,7 +712,7 @@ ren "C:\inetpub\wwwroot\Data\Sites\1\media\logos\nc64.txt" "nc64.exe"
 
 Then we uploaded our final DLL and waited.
 
-## Phase 9: Getting Reverse Shell as GinaWild
+##  Getting Reverse Shell as GinaWild
 
 We started our listener:
 
@@ -734,7 +735,7 @@ c:\share> whoami
 windcorp\ginawild
 ```
 
-## Phase 10: Getting SYSTEM Shell
+##  Getting SYSTEM Shell
 
 Now that `Bginfo64.exe` was replaced with `nc64.exe`, we started another listener:
 
@@ -757,7 +758,7 @@ C:\Windows\system32> whoami
 nt authority\system
 ```
 
-## Phase 11: Retrieving Flags
+##  Retrieving Flags
 
 With the ginawild shell:
 
@@ -770,9 +771,9 @@ With the SYSTEM shell, we continue into the domain-privilege-escalation phase be
 
 ---
 
-# Complete Write-Up: Privilege Escalation to Domain Admin
+#  Privilege Escalation to Domain Admin
 
-## Theory: Understanding the Attack Path
+## Understanding the Attack Path
 
 After gaining a shell as `ginawild`, we needed to understand how to escalate our privileges further. The `Get-bADpasswords` script was a critical component because it had the ability to read password hashes from Active Directory. However, the script was digitally signed, meaning we couldn't modify it directly without breaking the signature check. Our goal was to obtain the certificate used to sign the script, modify the script to execute our own commands, sign the modified version ourselves, and trigger execution to get a shell as the account running the script - which would carry Domain Admin-level privileges.
 
@@ -780,7 +781,7 @@ The key insight was discovering a deleted certificate sitting in the Recycle Bin
 
 Once we had a shell as `bpassrunner`, we performed a DCSync attack to extract the Administrator's NTLM hash. That hash was then used to create a Kerberos ticket and authenticate as Administrator, giving us full control over the domain.
 
-## Phase 1: Exploring GinaWild's Environment
+##  Exploring GinaWild's Environment
 
 After gaining a shell as `ginawild`, we began exploring the user's environment for useful files, shortcuts, or configurations that could help us escalate privileges further. We navigated to the Public Desktop directory, which contains shortcuts visible on every user's desktop.
 
@@ -814,7 +815,7 @@ C:\Get-bADpasswords\run.vbs
 
 This revealed the shortcut points to `run.vbs` inside the `Get-bADpasswords` directory - meaning the `Get-bADpasswords` script could be triggered by running this VBS file. The fact that this shortcut lives on the Public Desktop suggests the script is run regularly by users with elevated privileges, making it a perfect target for our attack.
 
-## Phase 2: Discovering Certificate Files in the Recycle Bin
+##  Discovering Certificate Files in the Recycle Bin
 
 While enumerating the system, we checked the Recycle Bin for any interesting files that might have been deleted but not fully removed. We navigated to `C:\$Recycle.Bin`, which contains hidden per-user directories named after each user's SID.
 
@@ -872,7 +873,7 @@ C:\Users\GinaWild\Desktop\cert.pfx
 
 This revealed the original file was named `cert.pfx` and lived on GinaWild's desktop - a certificate stored directly on a user's desktop is very likely used for something specific, possibly code signing.
 
-## Phase 3: Downloading and Cracking Certificate Passwords
+## Downloading and Cracking Certificate Passwords
 
 To analyze the certificate files, we needed to transfer them to our attack machine first. We copied all three PFX files to the writable SMB share for easy download:
 
@@ -947,7 +948,7 @@ sys     0m0.104s
 
 We successfully cracked both certificates with passwords `abceasyas123` and `whysoeasy?`.
 
-## Phase 4: Extracting and Analyzing the Certificate
+## Extracting and Analyzing the Certificate
 
 With the passwords in hand, we could extract the certificate from the PFX file:
 
@@ -1013,7 +1014,7 @@ Certificate:
 
 This was exactly what we needed. The certificate could be used to sign PowerShell scripts, and since it's issued to Administrator, it would be trusted system-wide.
 
-## Phase 5: Hijacking the Get-bADpasswords Script
+## Hijacking the Get-bADpasswords Script
 
 The `Get-bADpasswords.ps1` script was signed with a certificate that let it bypass AppLocker. Since we now had the signing certificate and its password, we could modify the script and re-sign it ourselves.
 
@@ -1055,7 +1056,7 @@ whoami /all > C:\Programdata\0xdf.txt
 
 This would write detailed user information to a file when the script executed, helping us confirm the user context it runs under.
 
-## Phase 6: Signing the Modified Script
+##  Signing the Modified Script
 
 Now we needed to sign the modified script using the certificate we extracted. We worked in PowerShell on the target machine:
 
@@ -1095,7 +1096,7 @@ SignerCertificate                         Status                                
 
 The script was now signed with the Administrator's certificate and would bypass AppLocker's script-signing requirement.
 
-## Phase 7: Triggering Script Execution
+##  Triggering Script Execution
 
 To trigger the script, we ran the `run.vbs` file:
 
@@ -1171,7 +1172,7 @@ windcorp\bpassrunner
 
 We successfully got a shell as `bpassrunner`.
 
-## Phase 9: DCSync Attack to Extract the Administrator's Hash
+## DCSync Attack to Extract the Administrator's Hash
 
 The `Get-bADpasswords` script requires Domain Admin-equivalent privileges to function, meaning `bpassrunner` has DCSync permissions. We used `Get-ADReplAccount` to extract the Administrator's NTLM hash:
 
@@ -1211,7 +1212,7 @@ Secrets
 
 We successfully extracted the Administrator's NTLM hash: `b3ff8d7532eef396a5347ed33933030f`.
 
-## Phase 10: Creating a Kerberos Ticket Using the Hash
+##  Creating a Kerberos Ticket Using the Hash
 
 We used `ktutil` to create a keytab file containing the Administrator hash:
 
@@ -1253,7 +1254,7 @@ Valid starting       Expires              Service principal
         renew until 11/11/2022 22:48:07
 ```
 
-## Phase 11: Alternative Ticket Acquisition with Impacket
+##  Alternative Ticket Acquisition with Impacket
 
 We could also use `getTGT.py` from Impacket to get a ticket:
 
@@ -1282,7 +1283,7 @@ Valid starting       Expires              Service principal
         renew until 11/12/2022 11:54:11
 ```
 
-## Phase 12: Getting Administrator Shell via Evil-WinRM
+##  Getting Administrator Shell via Evil-WinRM
 
 With the Kerberos ticket, we connected as Administrator using Evil-WinRM:
 
@@ -1312,7 +1313,7 @@ Info: Establishing connection to remote endpoint
 
 <img src="POC/Hathor_pwned.png">
 
-## Phase 13: Retrieving the Root Flag
+##  Retrieving the Root Flag
 
 Finally, we retrieved the root flag:
 
