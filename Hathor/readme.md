@@ -204,8 +204,8 @@ The most promising option in the Administrator panel was the **File Manager**. B
 
 We located the File Manager feature, which allows file uploads and basic file management. Testing the upload function showed it only permitted certain extensions - `.txt`, `.pdf`, `.doc` - while explicitly blocking dangerous ones like `.aspx`.
 
-<img src="POC/Upload_txt_files.png">
 
+<img src="https://github.com/HOZAIFAN/HackTheBox-WriteUps./blob/main/Hathor/POC/Upload_txt_files.png">
 
 Since only `.txt` files were allowed through the uploader, we needed another way to get an executable script onto the server. Doing further research turned up a public repository containing an ASP.NET web shell we could try to smuggle through in disguise:
 
