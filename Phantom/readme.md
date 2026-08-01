@@ -7,7 +7,7 @@ Domain: phantom.vl \
 IP Address: 10.129.234.63 \
 Pentester:RavenHex 
 
-<img src=”POC/Intro.png”>
+<img src="POC/Intro.png">
 
 ## Introduction
 
@@ -991,7 +991,7 @@ cat C:\Users\Administrator\Desktop\root.txt
 c4c2f175************************
 ```
 
-<img src=”POC/pwned.png”>
+<img src="POC/pwned.png">
 ---
 
 ## Summary of All Credentials Found
